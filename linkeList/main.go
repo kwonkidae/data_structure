@@ -53,9 +53,19 @@ func (linkedList *LinkedList) LastNode() *Node {
 	return lastNode
 }
 
+// AddToEnd methos adds the node with property to the end
 func (linkedList *LinkedList) AddToEnd(property int) {
 	var node = &Node{}
 	node.property = property
+	node.nextNode = nil
+
+	var lastNode *Node
+
+	lastNode = linkedList.LastNode()
+
+	if lastNode != nil {
+		lastNode.nextNode = node
+	}
 }
 
 // AddToHead Add To Head method
@@ -81,8 +91,10 @@ func (linkedList *LinkedList) IterateList() {
 func main() {
 	var linkedList LinkedList
 	linkedList = LinkedList{}
+
 	linkedList.AddToHead(1)
 	linkedList.AddToHead(3)
-	linkedList.AddToHead(5)
+	linkedList.AddToEnd(5)
+	linkedList.AddAfter(1, 7)
 	linkedList.IterateList()
 }
